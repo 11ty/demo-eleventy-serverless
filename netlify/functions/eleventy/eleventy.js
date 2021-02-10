@@ -14,6 +14,16 @@ exports.handler = async (event, context) => {
     await elev.init();
     console.log( "Globs", elev.eleventyFiles.getFileGlobs() );
     console.log( "Files", await elev.eleventyFiles.getFiles() );
+    fs.readdir(process.cwd(), function (err, files) {
+        if (err) {
+          console.log('Unable to scan directory: ' + err);
+          return
+        } 
+
+        files.forEach(function (file) {
+          console.log("File in dir:", file); 
+        });
+    });
 
     let json = await elev.toJSON();
     if(!json.length) {
