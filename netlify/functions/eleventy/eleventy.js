@@ -8,13 +8,13 @@ exports.handler = async (event, context) => {
   try {
     process.env.ELEVENTY_CLOUD = process.env.DEPLOY_PRIME_URL || "";
 
-    let elev = new Eleventy("./test.njk");
+    let elev = new Eleventy(".");
 
     await elev.init();
 
     let json = await elev.toJSON();
     if(!json.length) {
-      throw new Error("Couldn’t find any generated output from Eleventy.");
+      throw new Error(`Couldn’t find any generated output from Eleventy: ${JSON.stringify(json)}`);
     }
 
     pageContent = json[0].content;
