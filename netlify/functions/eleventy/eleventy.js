@@ -15,25 +15,14 @@ exports.handler = async (event, context) => {
     console.log( "Globs", elev.eleventyFiles.getFileGlobs() );
     console.log( "Files", await elev.eleventyFiles.getFiles() );
 
-    fs.readdir(process.cwd(), function (err, files) {
+    fs.readdir(process.cwd() + "/src/netlify", function (err, files) {
       if (err) {
         console.log('Unable to scan directory: ' + err);
         return
       } 
 
       files.forEach(function (file) {
-        console.log("File in /:", file); 
-      });
-    });
-
-    fs.readdir(process.cwd() + "/src", function (err, files) {
-      if (err) {
-        console.log('Unable to scan directory: ' + err);
-        return
-      } 
-
-      files.forEach(function (file) {
-        console.log("File in /src/:", file); 
+        console.log("File in /src/netlify:", file); 
       });
     });
 
