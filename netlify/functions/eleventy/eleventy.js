@@ -8,7 +8,7 @@ exports.handler = async (event, context) => {
   try {
     process.env.ELEVENTY_CLOUD = process.env.DEPLOY_PRIME_URL || "";
 
-    let elev = new Eleventy(".");
+    let elev = new Eleventy("test.njk");
 
     await elev.init();
 
