@@ -9,22 +9,22 @@ exports.handler = async (event, context) => {
   try {
     process.env.ELEVENTY_CLOUD = process.env.DEPLOY_PRIME_URL || "";
     console.log( "Dir", process.cwd() );
-    console.log( "test.njk exists", fs.existsSync("./test.njk") );
-    let elev = new Eleventy("./src/netlify/functions/test.njk");
+    console.log( "test.njk exists", fs.existsSync("./src/netlify/functions/eleventy/test.njk") );
+    let elev = new Eleventy("./src/netlify/functions/eleventy/test.njk");
     await elev.init();
     console.log( "Globs", elev.eleventyFiles.getFileGlobs() );
     console.log( "Files", await elev.eleventyFiles.getFiles() );
 
-    fs.readdir(process.cwd() + "/src/netlify/functions", function (err, files) {
-      if (err) {
-        console.log('Unable to scan directory: ' + err);
-        return
-      } 
+    // fs.readdir(process.cwd() + "/src/netlify/functions", function (err, files) {
+    //   if (err) {
+    //     console.log('Unable to scan directory: ' + err);
+    //     return
+    //   } 
 
-      files.forEach(function (file) {
-        console.log("File in /src/netlify/functions:", file); 
-      });
-    });
+    //   files.forEach(function (file) {
+    //     console.log("File in /src/netlify/functions:", file); 
+    //   });
+    // });
 
     let json = await elev.toJSON();
     if(!json.length) {
