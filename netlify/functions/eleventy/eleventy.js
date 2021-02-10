@@ -1,4 +1,5 @@
 const Eleventy = require("@11ty/eleventy");
+const fs = require("fs");
 
 // Based on https://github.com/DavidWells/netlify-functions-workshop/blob/master/lessons-code-complete/use-cases/13-returning-dynamic-images/functions/return-image.js
 exports.handler = async (event, context) => {
@@ -7,8 +8,9 @@ exports.handler = async (event, context) => {
 
   try {
     process.env.ELEVENTY_CLOUD = process.env.DEPLOY_PRIME_URL || "";
-
-    let elev = new Eleventy("test.njk");
+    console.log( "Dir", process.cwd() );
+    console.log( "test.njk exists", fs.existsSync("./test.njk") );
+    let elev = new Eleventy("./test.njk");
 
     await elev.init();
 
