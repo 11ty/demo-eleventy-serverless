@@ -11,8 +11,9 @@ exports.handler = async (event, context) => {
     console.log( "Dir", process.cwd() );
     console.log( "test.njk exists", fs.existsSync("./test.njk") );
     let elev = new Eleventy("./test.njk");
-
     await elev.init();
+    console.log( "Globs", elev.eleventyFiles.getFileGlobs() );
+    console.log( "Files", await elev.eleventyFiles.getFiles() );
 
     let json = await elev.toJSON();
     if(!json.length) {
