@@ -11,7 +11,7 @@ exports.handler = async (event, context) => {
     
     process.chdir("./src/netlify/functions/eleventy/");
 
-    let src = "./src/netlify/functions/eleventy/view.vue";
+    let src = "./src/netlify/functions/eleventy/nunjucks.njk";
     console.log( src, "exists:", fs.existsSync(src) );
 
     let elev = new Eleventy(src);
