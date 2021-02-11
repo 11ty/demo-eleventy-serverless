@@ -1,7 +1,6 @@
 const Eleventy = require("@11ty/eleventy");
 const fs = require("fs");
 
-// Based on https://github.com/DavidWells/netlify-functions-workshop/blob/master/lessons-code-complete/use-cases/13-returning-dynamic-images/functions/return-image.js
 exports.handler = async (event, context) => {
   let {} = event.queryStringParameters;
   let pageContent;
@@ -10,9 +9,9 @@ exports.handler = async (event, context) => {
     process.env.ELEVENTY_CLOUD = process.env.DEPLOY_PRIME_URL || "";
     process.env.ELEVENTY_EXPERIMENTAL = true;
     
-    process.chdir("./src/netlify/functions/eleventycloud/");
+    process.chdir("./src/netlify/functions/eleventy/");
 
-    let src = "./src/netlify/functions/eleventycloud/view.vue";
+    let src = "./src/netlify/functions/eleventy/view.vue";
     console.log( src, "exists:", fs.existsSync(src) );
 
     let elev = new Eleventy(src);
