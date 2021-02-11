@@ -1,4 +1,5 @@
 const Eleventy = require("@11ty/eleventy");
+// workaround the netlify functions bundler, include local config file manually
 const EleventyConfig = require("./.eleventy.js");
 const debug = require("debug");
 const fs = require("fs");
@@ -20,6 +21,7 @@ exports.handler = async (event, context) => {
     debug.enable("Eleventy*");
 
     let elev = new Eleventy(src);
+    elev.setConfigPathOverride("./.eleventy.js");
     await elev.init();
 
     let json = await elev.toJSON();
