@@ -1,4 +1,5 @@
 const Eleventy = require("@11ty/eleventy");
+const EleventyConfig = require("./.eleventy.js");
 const fs = require("fs");
 
 exports.handler = async (event, context) => {
@@ -8,7 +9,6 @@ exports.handler = async (event, context) => {
   try {
     process.env.ELEVENTY_CLOUD = process.env.DEPLOY_PRIME_URL || "";
     process.env.ELEVENTY_EXPERIMENTAL = true;
-    process.env.DEBUG = true;
     
     process.chdir("./src/netlify/functions/eleventy/");
 
@@ -17,7 +17,6 @@ exports.handler = async (event, context) => {
     console.log( ".eleventy.js config exists:", fs.existsSync("./.eleventy.js") );
 
     let elev = new Eleventy(src);
-    elev.setIsVerbose(true);
     await elev.init();
 
     let json = await elev.toJSON();
