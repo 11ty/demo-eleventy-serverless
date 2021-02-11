@@ -8,6 +8,10 @@ exports.handler = async (event, context) => {
 
   try {
     process.env.ELEVENTY_CLOUD = process.env.DEPLOY_PRIME_URL || "";
+    process.env.ELEVENTY_EXPERIMENTAL = true;
+    
+    process.chdir("./src/netlify/functions/eleventycloud/");
+
     let src = "./src/netlify/functions/eleventy/test.njk";
     console.log( src, "exists:", fs.existsSync(src) );
 

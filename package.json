@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@11ty/eleventy": "^1.0.0-canary.2"
+    "@11ty/eleventy": "^1.0.0-canary.2",
+    "@11ty/eleventy-plugin-vue": "^0.2.2"
   }
 }
