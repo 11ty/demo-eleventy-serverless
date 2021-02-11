@@ -8,6 +8,7 @@ exports.handler = async (event, context) => {
   try {
     process.env.ELEVENTY_CLOUD = process.env.DEPLOY_PRIME_URL || "";
     process.env.ELEVENTY_EXPERIMENTAL = true;
+    process.env.DEBUG = true;
     
     process.chdir("./src/netlify/functions/eleventy/");
 
@@ -15,6 +16,7 @@ exports.handler = async (event, context) => {
     console.log( src, "exists:", fs.existsSync(src) );
 
     let elev = new Eleventy(src);
+    elev.setIsVerbose(true);
     await elev.init();
 
     let json = await elev.toJSON();
