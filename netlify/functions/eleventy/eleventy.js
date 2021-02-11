@@ -1,5 +1,6 @@
 const Eleventy = require("@11ty/eleventy");
 const EleventyConfig = require("./.eleventy.js");
+const debug = require("debug");
 const fs = require("fs");
 
 exports.handler = async (event, context) => {
@@ -15,6 +16,8 @@ exports.handler = async (event, context) => {
     let src = "./view.vue";
     console.log( src, "exists:", fs.existsSync(src) );
     console.log( ".eleventy.js config exists:", fs.existsSync("./.eleventy.js") );
+    
+    debug.enable("Eleventy*");
 
     let elev = new Eleventy(src);
     await elev.init();
