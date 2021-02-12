@@ -12,7 +12,7 @@ exports.handler = async (event, context) => {
     process.env.ELEVENTY_CLOUD = process.env.DEPLOY_PRIME_URL || "";
     process.env.ELEVENTY_EXPERIMENTAL = true;
     
-    process.chdir("./src/netlify/functions/eleventy/");
+    process.chdir("/var/task/src/netlify/functions/eleventy/");
 
     let src = "./view.vue";
     console.log( src, "exists:", fs.existsSync(src) );
