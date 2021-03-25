@@ -15,6 +15,7 @@ async function getEleventyOutput(inputPath) {
   debug.enable("Eleventy*");
 
   let elev = new Eleventy(INPUT_DIR);
+  elev.setInputDir(INPUT_DIR);
   await elev.init();
 
   let json = await elev.toJSON();
