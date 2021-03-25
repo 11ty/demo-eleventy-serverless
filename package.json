@@ -4,14 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "ELEVENTY_EXPERIMENTAL=true npx @11ty/eleventy",
+    "bundle": "./bundle.sh",
+    "local-test": "./bundle.sh && cd netlify/functions/cloud && node index.js",
+    "build-production": "npm run bundle && npm run build"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "@11ty/eleventy": "^1.0.0-canary.2",
-    "@11ty/eleventy-plugin-vue": "^0.2.4",
-    "debug": "^4.3.1"
+    "@11ty/eleventy": "1.0.0-canary.10",
+    "@11ty/eleventy-plugin-vue": "^0.3.0",
+    "debug": "^4.3.1",
+    "fs-extra": "^9.1.0"
   }
 }
