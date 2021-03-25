@@ -1,6 +1,4 @@
-echo ""
 echo "Bundling the Eleventy Cloud Netlify Function"
-echo ""
 
 mkdir -p ./netlify/functions/cloud/src/
 
@@ -12,3 +10,5 @@ cp .eleventy.js ./netlify/functions/cloud/
 
 # Build files
 cp -R src/ ./netlify/functions/cloud/src/
+
+echo "Finished copying"
