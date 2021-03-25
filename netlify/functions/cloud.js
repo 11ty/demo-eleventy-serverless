@@ -1,6 +1,7 @@
 const path = require("path");
 const Eleventy = require("@11ty/eleventy");
 const debug = require("debug");
+const fs = require("fs");
 
 const PROJECT_DIR = "/var/task/src/netlify/functions/cloud/";
 const INPUT_DIR = "./src/";
@@ -40,12 +41,12 @@ exports.handler = async (event, context) => {
   let { name } = event.queryStringParameters;
 
   try {
-    if(process.env.NETLIFY) {
+    if(fs.existsSync(PROJECT_DIR)) {
+      console.log( "Changing Project Dir: ", PROJECT_DIR );
       process.chdir(PROJECT_DIR);
     }
 
     console.log( "Cwd: ", process.cwd() );
-    console.log( "Project Dir: ", PROJECT_DIR );
     console.log( "Input Dir: ", INPUT_DIR);
     console.log( "Path: ", INPUT_PATH );
 
