@@ -1,1 +1,1 @@
-module.exports = "global data";
+module.exports = "I am Global Data";
