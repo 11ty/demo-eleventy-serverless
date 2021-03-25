@@ -45,6 +45,7 @@ exports.handler = async (event, context) => {
       throw new Error(`Invalid slug: ${slug}`);
     }
 
+    console.log( "Cwd: ", process.cwd() );
     console.log( "Project Dir: ", PROJECT_DIR );
     console.log( "Input Dir: ", INPUT_DIR);
     console.log( "Path: ", inputPath );
