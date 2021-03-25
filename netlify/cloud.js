@@ -1,9 +1,7 @@
 const path = require("path");
 const Eleventy = require("@11ty/eleventy");
 const debug = require("debug");
-const fs = require("fs-extra");
 
-const PROJECT_DIR = "/var/task/src/netlify/functions/cloud/";
 const INPUT_DIR = "./src/";
 const FILE_MAP = {
   "vue": "./src/sample-vue.vue",
@@ -41,20 +39,14 @@ exports.handler = async (event, context) => {
   let { slug } = event.queryStringParameters;
 
   try {
-    process.chdir(PROJECT_DIR);
 
     let inputPath = FILE_MAP[slug];
     if(!inputPath) {
       throw new Error(`Invalid slug: ${slug}`);
     }
 
-    console.log( "Project Dir: ", PROJECT_DIR );
     console.log( "Input Dir: ", INPUT_DIR);
     console.log( "Path: ", inputPath );
-
-    if(!path.resolve(PROJECT_DIR, inputPath).startsWith(PROJECT_DIR)) {
-      throw new Error(`Invalid file path: ${inputPath}`);
-    }
 
     return {
       statusCode: 200,
