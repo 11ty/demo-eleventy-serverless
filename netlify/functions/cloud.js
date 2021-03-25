@@ -10,7 +10,7 @@ process.env.ELEVENTY_CLOUD = true;
 process.env.ELEVENTY_EXPERIMENTAL = true;
 
 async function getEleventyOutput(inputPath, data) {
-  debug.enable("Eleventy*");
+  // debug.enable("Eleventy*");
 
   let elev = new Eleventy(inputPath, null, {
     config: function(eleventyConfig) {
@@ -40,16 +40,12 @@ exports.handler = async (event, context) => {
   let { name } = event.queryStringParameters;
 
   try {
-    process.chdir(PROJECT_DIR);
+    // process.chdir(PROJECT_DIR);
 
     console.log( "Cwd: ", process.cwd() );
     console.log( "Project Dir: ", PROJECT_DIR );
     console.log( "Input Dir: ", INPUT_DIR);
     console.log( "Path: ", INPUT_PATH );
-
-    if(!path.resolve(PROJECT_DIR, INPUT_PATH).startsWith(PROJECT_DIR)) {
-      throw new Error(`Invalid file path: ${INPUT_PATH}`);
-    }
 
     return {
       statusCode: 200,
@@ -76,6 +72,6 @@ exports.handler = async (event, context) => {
 // For local testing
 // (async function() {
 //   // let content = await getEleventyOutput("./src/sample-vue.vue");
-//   let content = await getEleventyOutput("./src/sample-nunjucks.njk");
+//   let content = await getEleventyOutput("./src/sample-nunjucks.njk", { name: "Zach" });
 //   console.log( content );
 // })();
