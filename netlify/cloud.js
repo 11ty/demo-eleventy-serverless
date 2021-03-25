@@ -11,6 +11,9 @@ const FILE_MAP = {
 process.env.ELEVENTY_CLOUD = true;
 process.env.ELEVENTY_EXPERIMENTAL = true;
 
+// Workaround the bundler—is this necessary?
+const eleventyConfig = require("./.eleventy.js");
+
 async function getEleventyOutput(inputPath) {
   debug.enable("Eleventy*");
 
