@@ -4,10 +4,7 @@ const debug = require("debug");
 
 const PROJECT_DIR = "/var/task/src/netlify/functions/cloud/";
 const INPUT_DIR = "./src/";
-const FILE_MAP = {
-  "vue": "./src/sample-vue.vue",
-  "nunjucks": "./src/sample-nunjucks.njk",
-};
+const INPUT_PATH = "./src/sample-nunjucks.njk";
 
 process.env.ELEVENTY_CLOUD = true;
 process.env.ELEVENTY_EXPERIMENTAL = true;
@@ -20,7 +17,6 @@ async function getEleventyOutput(inputPath) {
   await elev.init();
 
   let json = await elev.toJSON();
-  console.log( json );
   if(!json.length) {
     throw new Error("Couldn’t find any generated output from Eleventy.");
   }
@@ -42,18 +38,13 @@ exports.handler = async (event, context) => {
   try {
     process.chdir(PROJECT_DIR);
 
-    let inputPath = FILE_MAP[slug];
-    if(!inputPath) {
-      throw new Error(`Invalid slug: ${slug}`);
-    }
-
     console.log( "Cwd: ", process.cwd() );
     console.log( "Project Dir: ", PROJECT_DIR );
     console.log( "Input Dir: ", INPUT_DIR);
-    console.log( "Path: ", inputPath );
+    console.log( "Path: ", INPUT_PATH );
 
-    if(!path.resolve(PROJECT_DIR, inputPath).startsWith(PROJECT_DIR)) {
-      throw new Error(`Invalid file path: ${inputPath}`);
+    if(!path.resolve(PROJECT_DIR, INPUT_PATH).startsWith(PROJECT_DIR)) {
+      throw new Error(`Invalid file path: ${INPUT_PATH}`);
     }
 
     return {
