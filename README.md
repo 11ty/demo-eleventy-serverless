@@ -19,9 +19,9 @@ Requires `netlify-cli` for local testing, run `npm install netlify-cli -g`.
 ## How it works
 
 1. Use Eleventy as normal.
-  - In this demo `src` is the input directory.
-  - For this demo we include one Nunjucks template (`sample-nunjucks.njk`), a Global Data file, an include template, and an Eleventy layout.
+    - In this demo `src` is the input directory.
+    - For this demo we include one Nunjucks template (`sample-nunjucks.njk`), a Global Data file, an include template, and an Eleventy layout.
 2. `./netlify/functions/cloud.js` is the code for running Eleventy in the serverless function.
-  - This requires Eleventy 1.0. this demo is currently using a Canary build. Be careful here, Canary is considered unstable! Don’t use it in production.
+    - This requires Eleventy 1.0. this demo is currently using a Canary build. Be careful here, Canary is considered unstable! Don’t use it in production.
 3. `./netlify/functions/cloud.js` compiles and renders `sample-nunjucks.njk` at request time and sets query parameters as Global Data in Eleventy’s cascade.
 4. `bundle.sh` automates bundling your build’s code into the serverless function for deployment. It puts files into your `./netlify/functions/cloud/` directory.
