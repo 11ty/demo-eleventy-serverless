@@ -6,6 +6,8 @@ Running Eleventy inside of a Netlify serverless function.
 
 ## Locally
 
+Requires `netlify-cli` for local testing, run `npm install netlify-cli -g`.
+
 1. Run `npm start`
 1. Navigate to the demo URL at `http://localhost:8888/.netlify/functions/cloud?name=ZAAAACH`
 
