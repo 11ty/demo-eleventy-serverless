@@ -40,7 +40,9 @@ exports.handler = async (event, context) => {
   let { name } = event.queryStringParameters;
 
   try {
-    // process.chdir(PROJECT_DIR);
+    if(process.env.NETLIFY) {
+      process.chdir(PROJECT_DIR);
+    }
 
     console.log( "Cwd: ", process.cwd() );
     console.log( "Project Dir: ", PROJECT_DIR );
