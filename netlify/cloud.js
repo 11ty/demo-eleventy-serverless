@@ -1,18 +1,21 @@
 const path = require("path");
 const Eleventy = require("@11ty/eleventy");
+const debug = require("debug");
 const fs = require("fs-extra");
 
 const PROJECT_DIR = "/var/task/src/netlify/functions/cloud/";
 const INPUT_DIR = "./src/";
 const FILE_MAP = {
-  "sample-vue": "./src/sample-vue.vue",
-  "sample-nunjucks": "./src/sample-nunjucks.njk",
+  "vue": "./src/sample-vue.vue",
+  "nunjucks": "./src/sample-nunjucks.njk",
 };
 
 process.env.ELEVENTY_CLOUD = true;
 process.env.ELEVENTY_EXPERIMENTAL = true;
 
 async function getEleventyOutput(inputPath) {
+  debug.enable("Eleventy*");
+
   let elev = new Eleventy(inputPath);
   elev.setInputDir(INPUT_DIR);
   await elev.init();
