@@ -16,12 +16,13 @@ const FILE_MAP = {
 process.env.ELEVENTY_CLOUD = true;
 process.env.ELEVENTY_EXPERIMENTAL = true;
 
-async function getPageContent(inputPath) {
+async function getEleventyOutput(inputPath) {
   let elev = new Eleventy(inputPath);
   elev.setInputDir(INPUT_DIR);
   await elev.init();
 
   let json = await elev.toJSON();
+  console.log( json );
   if(!json.length) {
     throw new Error("Couldn’t find any generated output from Eleventy.");
   }
@@ -41,12 +42,7 @@ exports.handler = async (event, context) => {
   let { slug } = event.queryStringParameters;
 
   try {
-    // Hacky hack to make node_modules from Vue components (in /tmp/.cache/) work properly
-    if(!fs.existsSync("/tmp/.cache/vue/node_modules/")) {
-      fs.copySync("/var/task/src/node_modules/", "/tmp/.cache/vue/node_modules/");
-    }
-
-    // process.chdir(PROJECT_DIR);
+    process.chdir(PROJECT_DIR);
 
     let inputPath = FILE_MAP[slug];
     if(!inputPath) {
@@ -66,7 +62,7 @@ exports.handler = async (event, context) => {
       headers: {
         "content-type": "text/html; charset=UTF-8"
       },
-      body: await getPageContent(inputPath),
+      body: await getEleventyOutput(inputPath),
       isBase64Encoded: false
     }
   } catch (error) {
@@ -83,7 +79,7 @@ exports.handler = async (event, context) => {
 
 // For local testing
 // (async function() {
-//   // let content = await getPageContent("./src/sample-vue.vue");
-//   let content = await getPageContent("./src/sample-nunjucks.njk");
+//   // let content = await getEleventyOutput("./src/sample-vue.vue");
+//   let content = await getEleventyOutput("./src/sample-nunjucks.njk");
 //   console.log( content );
 // })();
