@@ -1,10 +1,6 @@
 const path = require("path");
 const Eleventy = require("@11ty/eleventy");
-const debug = require("debug");
 const fs = require("fs-extra");
-
-// workaround the bundler to hardcode dependencies
-const eleventyConfig = require("./.eleventy.js");
 
 const PROJECT_DIR = "/var/task/src/netlify/functions/cloud/";
 const INPUT_DIR = "./src/";

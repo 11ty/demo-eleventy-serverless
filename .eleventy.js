@@ -1,11 +1,9 @@
 const eleventyVue = require("@11ty/eleventy-plugin-vue");
 
 module.exports = function(eleventyConfig) {
-  let eleventyVueOptions = {};
-  if(process.env.ELEVENTY_CLOUD) {
-    eleventyVueOptions.cacheDirectory = "/tmp/.cache/vue/"
-  }
-  eleventyConfig.addPlugin(eleventyVue, eleventyVueOptions);
+  eleventyConfig.addPlugin(eleventyVue, {
+    cacheDirectory: "/tmp/.cache/vue/"
+  });
 
   return {
     dir: {
