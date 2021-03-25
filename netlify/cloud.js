@@ -14,8 +14,7 @@ process.env.ELEVENTY_EXPERIMENTAL = true;
 async function getEleventyOutput(inputPath) {
   debug.enable("Eleventy*");
 
-  let elev = new Eleventy(inputPath);
-  elev.setInputDir(INPUT_DIR);
+  let elev = new Eleventy(INPUT_DIR);
   await elev.init();
 
   let json = await elev.toJSON();
