@@ -7,7 +7,7 @@ const fs = require("fs-extra");
 const eleventyConfig = require("./.eleventy.js");
 
 const PROJECT_DIR = "/var/task/src/netlify/functions/cloud/";
-const INPUT_DIR = `./src/`;
+const INPUT_DIR = "./src/";
 const FILE_MAP = {
   "sample-vue": "./src/sample-vue.vue",
   "sample-nunjucks": "./src/sample-nunjucks.njk",
@@ -16,9 +16,9 @@ const FILE_MAP = {
 process.env.ELEVENTY_CLOUD = true;
 process.env.ELEVENTY_EXPERIMENTAL = true;
 
-async function getPageContent(inputDir, inputPath) {
+async function getPageContent(inputPath) {
   let elev = new Eleventy(inputPath);
-  elev.setInputDir(inputDir);
+  elev.setInputDir(INPUT_DIR);
   await elev.init();
 
   let json = await elev.toJSON();
@@ -27,7 +27,6 @@ async function getPageContent(inputDir, inputPath) {
   }
 
   for(let entry of json) {
-    console.log( entry.inputPath, inputPath );
     if(entry.inputPath === inputPath) {
       console.log( "Content found", inputPath );
       return entry.content;
@@ -54,9 +53,9 @@ exports.handler = async (event, context) => {
       throw new Error(`Invalid slug: ${slug}`);
     }
 
-    console.log( "Path: ", inputPath );
     console.log( "Project Dir: ", PROJECT_DIR );
     console.log( "Input Dir: ", INPUT_DIR);
+    console.log( "Path: ", inputPath );
 
     if(!path.resolve(PROJECT_DIR, inputPath).startsWith(PROJECT_DIR)) {
       throw new Error(`Invalid file path: ${inputPath}`);
@@ -67,7 +66,7 @@ exports.handler = async (event, context) => {
       headers: {
         "content-type": "text/html; charset=UTF-8"
       },
-      body: await getPageContent(INPUT_DIR, inputPath),
+      body: await getPageContent(inputPath),
       isBase64Encoded: false
     }
   } catch (error) {
@@ -84,7 +83,7 @@ exports.handler = async (event, context) => {
 
 // For local testing
 // (async function() {
-//   // let content = await getPageContent("src", "./src/sample-vue.vue");
-//   let content = await getPageContent("src", "./src/sample-nunjucks.njk");
+//   // let content = await getPageContent("./src/sample-vue.vue");
+//   let content = await getPageContent("./src/sample-nunjucks.njk");
 //   console.log( content );
 // })();
