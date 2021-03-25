@@ -9,10 +9,14 @@ const INPUT_PATH = "./src/sample-nunjucks.njk";
 process.env.ELEVENTY_CLOUD = true;
 process.env.ELEVENTY_EXPERIMENTAL = true;
 
-async function getEleventyOutput(inputPath) {
+async function getEleventyOutput(inputPath, data) {
   debug.enable("Eleventy*");
 
-  let elev = new Eleventy(inputPath);
+  let elev = new Eleventy(inputPath, null, {
+    config: function(eleventyConfig) {
+      eleventyConfig.addGlobalData("name", data.name);
+    }
+  });
   elev.setInputDir(INPUT_DIR);
   await elev.init();
 
@@ -33,7 +37,7 @@ async function getEleventyOutput(inputPath) {
 }
 
 exports.handler = async (event, context) => {
-  let { slug } = event.queryStringParameters;
+  let { name } = event.queryStringParameters;
 
   try {
     process.chdir(PROJECT_DIR);
@@ -52,7 +56,9 @@ exports.handler = async (event, context) => {
       headers: {
         "content-type": "text/html; charset=UTF-8"
       },
-      body: await getEleventyOutput(inputPath),
+      body: await getEleventyOutput(inputPath, {
+        name
+      }),
       isBase64Encoded: false
     }
   } catch (error) {

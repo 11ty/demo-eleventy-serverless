@@ -10,10 +10,13 @@ localdata: "Hello from Netlify Functions"
 		<title></title>
 	</head>
 	<body>
-		{{ localdata }}
-    
-    {{ globaldata }}
+		{% if name %}Hello {{ name }}!!{% endif %}
 
-    {% include "include.njk" %}
+		{{ localdata }}
+		
+		{{ globaldata }}
+
+
+		{% include "include.njk" %}
 	</body>
 </html>
