@@ -24,4 +24,4 @@ Requires `netlify-cli` for local testing, run `npm install netlify-cli -g`.
 2. `./netlify/functions/cloud.js` is the code for running Eleventy in the serverless function.
   - This requires Eleventy 1.0. this demo is currently using a Canary build. Be careful here, Canary is considered unstable! Don’t use it in production.
 3. `./netlify/functions/cloud.js` compiles and renders `sample-nunjucks.njk` at request time and sets query parameters as Global Data in Eleventy’s cascade.
-4. `bundle.sh` automates bundling your build’s code into the serverless function for deployment. This is the `./netlify/functions/cloud/` directory.
+4. `bundle.sh` automates bundling your build’s code into the serverless function for deployment. It puts files into your `./netlify/functions/cloud/` directory.
