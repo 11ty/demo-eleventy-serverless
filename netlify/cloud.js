@@ -51,7 +51,7 @@ exports.handler = async (event, context) => {
 
     let inputPath = FILE_MAP[slug];
     if(!inputPath) {
-      throw new Error(`Invalid type: ${type}`);
+      throw new Error(`Invalid slug: ${slug}`);
     }
 
     console.log( "Path: ", inputPath );
