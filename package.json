@@ -14,6 +14,7 @@
   "license": "MIT",
   "dependencies": {
     "@11ty/eleventy": "1.0.0-canary.10",
+    "@11ty/eleventy-plugin-vue": "^0.3.1-canary.2",
     "debug": "^4.3.1"
   }
 }
