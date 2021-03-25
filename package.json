@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "ELEVENTY_EXPERIMENTAL=true npx @11ty/eleventy",
+    "build": "npx @11ty/eleventy",
     "bundle": "./bundle.sh",
     "local-test": "./bundle.sh && netlify dev",
     "build-production": "npm run bundle && npm run build"

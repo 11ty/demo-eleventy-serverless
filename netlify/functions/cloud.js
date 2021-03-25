@@ -1,20 +1,18 @@
 const path = require("path");
-const Eleventy = require("@11ty/eleventy");
-const debug = require("debug");
 const fs = require("fs");
+const Eleventy = require("@11ty/eleventy");
+// const debug = require("debug");
 
 const PROJECT_DIR = "/var/task/src/netlify/functions/cloud/";
 const INPUT_DIR = "./src/";
 const INPUT_PATH = "./src/sample-nunjucks.njk";
-
-process.env.ELEVENTY_CLOUD = true;
-process.env.ELEVENTY_EXPERIMENTAL = true;
 
 async function getEleventyOutput(inputPath, data) {
   // debug.enable("Eleventy*");
 
   let elev = new Eleventy(inputPath, null, {
     config: function(eleventyConfig) {
+      // Map the query param to Global Data
       eleventyConfig.addGlobalData("name", data.name);
     }
   });
@@ -38,8 +36,6 @@ async function getEleventyOutput(inputPath, data) {
 }
 
 exports.handler = async (event, context) => {
-  let { name } = event.queryStringParameters;
-
   try {
     if(fs.existsSync(PROJECT_DIR)) {
       console.log( "Changing Project Dir: ", PROJECT_DIR );
@@ -55,9 +51,7 @@ exports.handler = async (event, context) => {
       headers: {
         "content-type": "text/html; charset=UTF-8"
       },
-      body: await getEleventyOutput(INPUT_PATH, {
-        name
-      }),
+      body: await getEleventyOutput(INPUT_PATH, event.queryStringParameters),
       isBase64Encoded: false
     }
   } catch (error) {
@@ -71,10 +65,3 @@ exports.handler = async (event, context) => {
     }
   }
 }
-
-// For local testing
-// (async function() {
-//   // let content = await getEleventyOutput("./src/sample-vue.vue");
-//   let content = await getEleventyOutput("./src/sample-nunjucks.njk", { name: "Zach" });
-//   console.log( content );
-// })();
