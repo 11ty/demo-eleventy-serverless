@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx @11ty/eleventy",
     "bundle": "./bundle.sh",
-    "local-test": "./bundle.sh && netlify dev",
+    "start": "npm run bundle && netlify dev",
     "build-production": "npm run bundle && npm run build"
   },
   "keywords": [],
