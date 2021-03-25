@@ -46,7 +46,7 @@ exports.handler = async (event, context) => {
       fs.copySync("/var/task/src/node_modules/", "/tmp/.cache/vue/node_modules/");
     }
 
-    process.chdir(PROJECT_DIR);
+    // process.chdir(PROJECT_DIR);
 
     let inputPath = FILE_MAP[slug];
     if(!inputPath) {
