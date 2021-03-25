@@ -56,7 +56,7 @@ exports.handler = async (event, context) => {
       headers: {
         "content-type": "text/html; charset=UTF-8"
       },
-      body: await getEleventyOutput(inputPath, {
+      body: await getEleventyOutput(INPUT_PATH, {
         name
       }),
       isBase64Encoded: false
