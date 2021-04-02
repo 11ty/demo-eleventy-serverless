@@ -4,12 +4,10 @@ const Eleventy = require("@11ty/eleventy");
 // const debug = require("debug");
 
 function getInputDir() {
-  let filenameNoExtension = path.basename(__filename, path.extname(__filename));
-  let lookingFor = `netlify/functions/${filenameNoExtension}/`;
   let paths = [
     // "/var/task/src/netlify/functions/cloud/"
-    path.join(process.cwd(), `/src/${lookingFor}`), // process.cwd == "/var/task" on aws
-    path.join(process.cwd(), `${lookingFor}src/`), // on netlify dev
+    path.join(process.cwd(), `src/netlify/functions/cloud/`), // process.cwd == "/var/task" on aws
+    path.join(process.cwd(), `netlify/functions/cloud/src/`), // on netlify dev
   ];
 
   for(let path of paths) {
