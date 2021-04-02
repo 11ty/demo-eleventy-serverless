@@ -1,5 +1,8 @@
----
-localdata: "Hello from Netlify Functions"
+---js
+{
+	localdata: "Hello from Netlify Functions",
+	now: (new Date()).toISOString()
+}
 ---
 <!doctype html>
 <html lang="en">
@@ -10,8 +13,9 @@ localdata: "Hello from Netlify Functions"
 		<title>Eleventy Cloud Demo</title>
 	</head>
 	<body>
-		<h1>{% if name %}Hello {{ name }}!!{% else %}Welcome{% endif %}</h1>
-
+		<h1>{% if query.name %}Hello {{ query.name }}!!{% else %}Welcome{% endif %}</h1>
+		<p>Now: {{ now }}</p>
+		<p>Page Date: {{ page.date.toISOString() }}</p>
 		<p>{{ localdata }}</p>
 		<p>{{ globaldata }}</p>
 		<p>{% include "include.njk" %}</p>
