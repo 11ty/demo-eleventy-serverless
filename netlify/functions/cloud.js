@@ -6,7 +6,7 @@ const Eleventy = require("@11ty/eleventy");
 function getInputDir() {
   let paths = [
     // "/var/task/src/netlify/functions/cloud/"
-    path.join(process.cwd(), `src/netlify/functions/cloud/`), // process.cwd == "/var/task" on aws
+    path.join(process.cwd(), `src/netlify/functions/cloud/src/`), // process.cwd == "/var/task" on aws
     path.join(process.cwd(), `netlify/functions/cloud/src/`), // on netlify dev
   ];
 
