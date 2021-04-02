@@ -3,23 +3,28 @@ const fs = require("fs");
 const Eleventy = require("@11ty/eleventy");
 // const debug = require("debug");
 
-const DEMO_INPUT_DIR = "./src/";
-
-function changeProjectDir() {
+function getInputDir() {
   let filenameNoExtension = path.basename(__filename, path.extname(__filename));
-  let awsPath = `"/var/task/src/netlify/functions/${filenameNoExtension}/`;
+  let lookingFor = `netlify/functions/${filenameNoExtension}/`;
+  let paths = [
+    path.join(process.cwd(), `src/${lookingFor}`), // process.cwd == "/var/task" on aws
+    path.join(process.cwd(), `${lookingFor}src/`), // on netlify dev
+  ];
 
-  if(fs.existsSync(awsPath)) {
-    process.chdir(awsPath);
-  } else {
-    console.log( ">>>> NO DIR FOUND" );
+  for(let path of paths) {
+    if(fs.existsSync(path)) {
+      return path;
+    }
   }
+
+  throw new Error("No path found in", paths);
 }
 
 async function getEleventyOutput(inputDir, queryParams) {
   // debug.enable("Eleventy*");
 
-  let inputPath = "./" + path.join(inputDir, queryParams.path);
+  let inputPath = path.join(inputDir, queryParams.path);
+  console.log( inputPath );
   let elev = new Eleventy(inputPath, null, {
     config: function(eleventyConfig) {
       // Map the query param to Global Data
@@ -47,16 +52,14 @@ async function getEleventyOutput(inputDir, queryParams) {
 
 exports.handler = async (event, context) => {
   try {
-    changeProjectDir();
-
-    console.log( event.path, process.cwd() );
-
+    let inputDir = getInputDir();
+    console.log( ">>>FOUND", inputDir );
     return {
       statusCode: 200,
       headers: {
         "content-type": "text/html; charset=UTF-8"
       },
-      body: await getEleventyOutput(DEMO_INPUT_DIR, event.queryStringParameters),
+      body: await getEleventyOutput(inputDir, event.queryStringParameters),
       isBase64Encoded: false
     }
   } catch (error) {
