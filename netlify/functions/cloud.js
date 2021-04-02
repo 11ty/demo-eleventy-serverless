@@ -3,11 +3,11 @@ const fs = require("fs");
 const Eleventy = require("@11ty/eleventy");
 // const debug = require("debug");
 
-function getInputDir() {
+function getRootDir() {
   let paths = [
-    // "/var/task/src/netlify/functions/cloud/"
-    path.join(process.cwd(), `src/netlify/functions/cloud/src/`), // process.cwd == "/var/task" on aws
-    path.join(process.cwd(), `netlify/functions/cloud/src/`), // on netlify dev
+    // /var/task/src/netlify/functions/cloud/src/
+    path.join(process.cwd(), `src/netlify/functions/cloud/`), // netlify function
+    path.join(process.cwd(), `netlify/functions/cloud/`), // on netlify dev
   ];
 
   for(let path of paths) {
@@ -19,11 +19,26 @@ function getInputDir() {
   throw new Error(`No path found in ${paths}`);
 }
 
-async function getEleventyOutput(inputDir, queryParams) {
+function getOutputUrl(lambdaPath) {
+  let defaultPath = "/.netlify/functions/cloud";
+  if(lambdaPath.startsWith(defaultPath)) {
+    return lambdaPath.substr(defaultPath.length);
+  }
+  return "/";
+}
+
+async function getEleventyOutput(rootDir, lambdaPath, queryParams) {
+  let inputDir = path.join(rootDir, "src");
+  let contentMap = require(path.join(rootDir, "map.json"));
+  let contentKey = queryParams.url || getOutputUrl(lambdaPath);
   // debug.enable("Eleventy*");
 
-  let inputPath = path.join(inputDir, queryParams.path);
-  console.log( inputPath );
+  // find inputPath from map.json and output url
+  let inputPath = contentMap[contentKey];
+  if(!inputPath) {
+    throw new Error(`Output URL not found for ${contentKey} in ${JSON.stringify(contentMap)}`);
+  }
+
   let elev = new Eleventy(inputPath, null, {
     config: function(eleventyConfig) {
       // Map the query param to Global Data
@@ -51,14 +66,14 @@ async function getEleventyOutput(inputDir, queryParams) {
 
 exports.handler = async (event, context) => {
   try {
-    let inputDir = getInputDir();
-    console.log( ">>>FOUND", inputDir );
+    let rootDir = getRootDir();
+
     return {
       statusCode: 200,
       headers: {
         "content-type": "text/html; charset=UTF-8"
       },
-      body: await getEleventyOutput(inputDir, event.queryStringParameters),
+      body: await getEleventyOutput(rootDir, event.path, event.queryStringParameters),
       isBase64Encoded: false
     }
   } catch (error) {
