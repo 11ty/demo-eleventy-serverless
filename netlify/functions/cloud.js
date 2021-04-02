@@ -7,7 +7,8 @@ function getInputDir() {
   let filenameNoExtension = path.basename(__filename, path.extname(__filename));
   let lookingFor = `netlify/functions/${filenameNoExtension}/`;
   let paths = [
-    path.join(process.cwd(), `src/${lookingFor}`), // process.cwd == "/var/task" on aws
+    // "/var/task/src/netlify/functions/cloud/"
+    path.join(process.cwd(), `/src/${lookingFor}`), // process.cwd == "/var/task" on aws
     path.join(process.cwd(), `${lookingFor}src/`), // on netlify dev
   ];
 
@@ -17,7 +18,7 @@ function getInputDir() {
     }
   }
 
-  throw new Error("No path found in", paths);
+  throw new Error(`No path found in ${paths}`);
 }
 
 async function getEleventyOutput(inputDir, queryParams) {
