@@ -7,3 +7,15 @@ from = "/dynamic/"
 to = "/.netlify/functions/serverless"
 status = 200
 force = true
+
+[[redirects]]
+from = "/:key/"
+to = "/.netlify/functions/serverless"
+status = 200
+force = true
+
+[[redirects]]
+from = "/:key/cached/"
+to = "/.netlify/functions/ondemandbuilder"
+status = 200
+force = true

@@ -5,7 +5,8 @@
 	now: (new Date()).toISOString(),
 	permalink: {
 		build: "/",
-		serverless: "/dynamic/",
+		serverless: "/:key/",
+		ondemandbuilder: "/:key/cached/"
 	}
 }
 ---
@@ -14,7 +15,11 @@
 <p>{{ localdata }}</p>
 <p>{{ globaldata }}</p>
 <p>{% include "include.njk" %}</p>
+<pre>{{ eleventy | dump(2) }}</pre>
 
-<a href="/">Build Template</a>
-<a href="/dynamic/">Dynamic Template</a>
+<ul>
+	<li><a href="/">Build Template</a></li>
+	<li><a href="/this-can-be-anything/">Fully-dynamic Template</a></li>
+	<li><a href="/this-can-be-anything/cached/">On-demand Builder Template</a></li>
+</ul>
 

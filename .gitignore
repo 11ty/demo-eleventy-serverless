@@ -4,3 +4,5 @@ _site
 .cache
 netlify/functions/serverless/*
 !netlify/functions/serverless/index.js
+netlify/functions/ondemandbuilder/*
+!netlify/functions/ondemandbuilder/index.js
