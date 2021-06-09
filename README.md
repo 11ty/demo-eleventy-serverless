@@ -20,9 +20,9 @@ Running Eleventy inside of a Netlify serverless function.
 _This requires Eleventy 1.0 Canary 29 or newer. Be careful here, Canary is considered unstable! Don’t use it in production._
 
 1. Use Eleventy as normal.
-    - In this demo `src` is the input directory.
-    - For this demo we include one Nunjucks template (`./src/sample-nunjucks.njk`), a Global Data file, an include template, and an Eleventy layout.
-    - To make any template file into a serverless template, modify your `permalink` object to include a `serverless` key.
+	- In this demo `src` is the input directory.
+	- For this demo we include one Nunjucks template (`./src/sample-nunjucks.njk`), a Global Data file, an include template, and an Eleventy layout.
+	- To make any template file into a serverless template, modify your `permalink` object to include a `serverless` key.
 
 2. Add the bundler plugin to your Eleventy configuration file (probably `.eleventy.js`). The name property (we use `serverless` in this example) should match the `key` inside of your template’s `permalink` object.
 
@@ -30,10 +30,10 @@ _This requires Eleventy 1.0 Canary 29 or newer. Be careful here, Canary is consi
 const { EleventyServerlessBundlerPlugin } = require("@11ty/eleventy");
 
 module.exports = function(eleventyConfig) {
-    eleventyConfig.addPlugin(EleventyServerlessBundlerPlugin, {
-        name: "serverless",
-        functionsDir: "./netlify/functions/",
-    });
+	eleventyConfig.addPlugin(EleventyServerlessBundlerPlugin, {
+		name: "serverless",
+		functionsDir: "./netlify/functions/",
+	});
 };
 ```
 
@@ -46,28 +46,28 @@ const { EleventyServerless } = require("@11ty/eleventy");
 try { require("./eleventy-bundler-modules.js"); } catch(e) {}
 
 async function handler (event) {
-    let elev = new EleventyServerless("serverless", event.path, {
-        inputDir: "src",
-        functionsDir: "netlify/functions/",
-        query: event.queryStringParameters,
-    });
+	let elev = new EleventyServerless("serverless", event.path, {
+		inputDir: "src",
+		functionsDir: "netlify/functions/",
+		query: event.queryStringParameters,
+	});
 
-    try {
-        return {
-            statusCode: 200,
-            headers: {
-                "Content-Type": "text/html; charset=UTF-8"
-            },
-            body: await elev.render()
-        };
-    } catch (error) {
-        return {
-            statusCode: error.httpStatusCode || 500,
-            body: JSON.stringify({
-                error: error.message
-            })
-        };
-    }
+	try {
+		return {
+			statusCode: 200,
+			headers: {
+				"Content-Type": "text/html; charset=UTF-8"
+			},
+			body: await elev.render()
+		};
+	} catch (error) {
+		return {
+			statusCode: error.httpStatusCode || 500,
+			body: JSON.stringify({
+				error: error.message
+			})
+		};
+	}
 }
 
 // Netlify On-demand Builder (runs on first request only)
