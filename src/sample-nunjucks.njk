@@ -1,23 +1,21 @@
 ---js
 {
-	localdata: "Hello from Netlify Functions",
-	now: (new Date()).toISOString()
+	layout: "layout.njk",
+	localdata: "I am Local Data",
+	now: (new Date()).toISOString(),
+	permalink: {
+		build: "/",
+		serverless: "/dynamic/",
+	}
 }
 ---
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="This is a demo of running Eleventy in a serverless function.">
-		<title>Eleventy Cloud Demo</title>
-	</head>
-	<body>
-		<h1>{% if query.name %}Hello {{ query.name }}!!{% else %}Welcome{% endif %}</h1>
-		<p>Now: {{ now }}</p>
-		<p>Page Date: {{ page.date.toISOString() }}</p>
-		<p>{{ localdata }}</p>
-		<p>{{ globaldata }}</p>
-		<p>{% include "include.njk" %}</p>
-	</body>
-</html>
+<h1>Welcome to Eleventy Serverless</h1>
+<p>Now: {{ now }}</p>
+<p>Page Date: {{ page.date.toISOString() }}</p>
+<p>{{ localdata }}</p>
+<p>{{ globaldata }}</p>
+<p>{% include "include.njk" %}</p>
+
+<a href="/">Build Template</a>
+<a href="/dynamic/">Dynamic Template</a>
+
