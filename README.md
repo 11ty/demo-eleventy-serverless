@@ -1,4 +1,4 @@
-# Eleventy Cloud Demo
+# Eleventy Serverless Demo
 
 Running Eleventy inside of a Netlify serverless function.
 
