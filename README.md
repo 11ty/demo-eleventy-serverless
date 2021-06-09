@@ -36,4 +36,4 @@ module.exports = function(eleventyConfig) {
 };
 ```
 
-3. `./netlify/functions/serverless/index.js` is the code for running Eleventy in the serverless function.
+3. `./netlify/functions/serverless/index.js` is the boilerplate serverless function code.
