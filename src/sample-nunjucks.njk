@@ -6,20 +6,24 @@
 	permalink: {
 		build: "/",
 		serverless: "/:key/",
-		ondemandbuilder: "/:key/cached/"
+		dynamic: "/:key/dynamic/",
 	}
 }
 ---
 <h1>Welcome to Eleventy Serverless</h1>
+
+<ul>
+	<li><a href="/">Template render at Build Time</a></li>
+	<li><a href="/this-can-be-anything/">Template render on first-request only (On-demand Builder)</a></li>
+	<li><a href="/this-can-be-anything/dynamic/">Template render on every request</a></li>
+</ul>
+
 <p>Now: {{ now }}</p>
 <p>{{ localdata }}</p>
 <p>{{ globaldata }}</p>
 <p>{% include "include.njk" %}</p>
 <pre>{{ eleventy | dump(2) }}</pre>
 
-<ul>
-	<li><a href="/">Build Template</a></li>
-	<li><a href="/this-can-be-anything/">Fully-dynamic Template</a></li>
-	<li><a href="/this-can-be-anything/cached/">On-demand Builder Template</a></li>
-</ul>
-
+<footer>
+	<a href="https://github.com/11ty/demo-eleventy-serverless">Back to the <code>demo-eleventy-serverless</code> GitHub repo</a>
+</footer>

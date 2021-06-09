@@ -7,7 +7,7 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addPlugin(EleventyServerlessBundlerPlugin, {
-		name: "ondemandbuilder",
+		name: "dynamic",
 		functionsDir: "./netlify/functions/",
 	});
 

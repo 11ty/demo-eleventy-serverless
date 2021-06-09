@@ -40,8 +40,8 @@ async function handler (event) {
 // Choose one:
 
 // Netlify Function (runs every time)
-exports.handler = handler;
+// exports.handler = handler;
 
 // Netlify On-demand Builder (runs one request)
-// const { builder } = require("@netlify/functions");
-// exports.handler = builder(handler);
+const { builder } = require("@netlify/functions");
+exports.handler = builder(handler);

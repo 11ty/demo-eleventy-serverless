@@ -6,7 +6,7 @@ try { require("./eleventy-bundler-modules.js"); } catch(e) {}
 // const precompiledCollections = require("./_generated-serverless-collections.json");
 
 async function handler (event) {
-	let elev = new EleventyServerless("ondemandbuilder", event.path, {
+	let elev = new EleventyServerless("dynamic", event.path, {
 		inputDir: "src",
 		functionsDir: "netlify/functions/",
 		query: event.queryStringParameters,
@@ -40,8 +40,8 @@ async function handler (event) {
 // Choose one:
 
 // Netlify Function (runs every time)
-// exports.handler = handler;
+exports.handler = handler;
 
 // Netlify On-demand Builder (runs one request)
-const { builder } = require("@netlify/functions");
-exports.handler = builder(handler);
+// const { builder } = require("@netlify/functions");
+// exports.handler = builder(handler);
