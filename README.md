@@ -6,6 +6,7 @@ Running Eleventy inside of a Netlify serverless function.
 
 ### Locally
 
+1. Run `npm install`
 1. Run `npm start`
 1. Navigate to the demo URL at `http://localhost:8080/`
 
