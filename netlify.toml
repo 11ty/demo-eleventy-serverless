@@ -7,9 +7,11 @@ from = "/:key/"
 to = "/.netlify/functions/serverless"
 status = 200
 force = true
+_generated_by_eleventy_serverless = true
 
 [[redirects]]
 from = "/:key/dynamic/"
 to = "/.netlify/functions/dynamic"
 status = 200
 force = true
+_generated_by_eleventy_serverless = true
