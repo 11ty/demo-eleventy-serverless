@@ -17,7 +17,7 @@ Running Eleventy inside of a Netlify serverless function.
 
 ## How it works
 
-_This requires Eleventy 1.0 Canary 29 or newer. Be careful here, Canary is considered unstable! Don’t use it in production._
+_This requires Eleventy 1.0 Canary 30 or newer. Be careful here, Canary is considered unstable! Don’t use it in production._
 
 1. Use Eleventy as normal.
 	- In this demo `src` is the input directory.
