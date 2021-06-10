@@ -24,7 +24,17 @@ _This requires Eleventy 1.0 Canary 30 or newer. Be careful here, Canary is consi
 	- For this demo we include one Nunjucks template (`./src/sample-nunjucks.njk`), a Global Data file, an include template, and an Eleventy layout.
 	- To make any template file into a serverless template, modify your `permalink` object to include a `serverless` key.
 
-2. Add the bundler plugin to your Eleventy configuration file (probably `.eleventy.js`). The name property (we use `serverless` in this example) should match the `key` inside of your template’s `permalink` object.
+```
+---
+permalink:
+  build: "/"
+  serverless: "/:slug/"
+---
+```
+
+This makes `eleventy.path.slug` (the `slug` name matches `:slug`) available in global data for use in your serverless templates.
+
+2. Add the bundler plugin to your Eleventy configuration file (probably `.eleventy.js`). The name you pass into the plugin (we use `serverless` in this example) should match the key inside of your template’s `permalink` object (`permalink.serverless`).
 
 ```js
 const { EleventyServerlessBundlerPlugin } = require("@11ty/eleventy");
@@ -75,7 +85,7 @@ async function handler (event) {
 exports.handler = builder(handler);
 ```
 
-4. Add entries to your `.gitignore` file:
+4. Add entries to your `.gitignore` file so the bundles aren’t checked into your repository.
 
 ```
 netlify/functions/serverless/*
