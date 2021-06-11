@@ -32,7 +32,7 @@ async function handler (event) {
 			statusCode: error.httpStatusCode || 500,
 			body: JSON.stringify({
 				error: error.message
-			})
+			}, null, 2)
 		};
 	}
 }
