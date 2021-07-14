@@ -2,6 +2,8 @@
 
 Running Eleventy inside of a Netlify serverless function.
 
+_[Read the documentation on 11ty.dev](https://www.11ty.dev/docs/plugins/serverless/)_
+
 ## Run it
 
 ### Locally
@@ -16,6 +18,8 @@ Running Eleventy inside of a Netlify serverless function.
 1. [Deploy your own to Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/11ty/demo-eleventy-serverless)
 
 ## How it works
+
+_[Read the documentation on 11ty.dev](https://www.11ty.dev/docs/plugins/serverless/)_
 
 _This requires Eleventy 1.0 Canary 30 or newer. Be careful here, Canary is considered unstable! Don’t use it in production._
 
