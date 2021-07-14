@@ -88,6 +88,6 @@ exports.handler = builder(handler);
 4. Add entries to your `.gitignore` file so the bundles aren’t checked into your repository.
 
 ```
-netlify/functions/serverless/*
+netlify/functions/serverless/**
 !netlify/functions/serverless/index.js
 ```
