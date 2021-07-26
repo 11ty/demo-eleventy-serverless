@@ -5,8 +5,8 @@
 	now: (new Date()).toISOString(),
 	permalink: {
 		build: "/",
-		serverless: "/:key/",
-		dynamic: "/:key/dynamic/",
+		serverless: "/:slug/",
+		dynamic: "/:slug/dynamic/",
 	}
 }
 ---
@@ -18,14 +18,17 @@
 	<li><a href="/this-can-be-anything/dynamic/">Template render on every request</a></li>
 </ul>
 
-<p>Now: {{ now }}</p>
-<p><code>page.date</code>: {{ page.date }}</p>
 <p>{{ localdata }}</p>
 <p>{{ globaldata }}</p>
 <p>{% include "include.njk" %}</p>
 
-<h2><code>eleventy</code> Global Data Key:</h2>
+<h2><code>new Date()</code></h2>
+<pre>{{ now }}</pre>
 
+<h2><code>page</code> Data:</h2>
+<pre>{{ page | dump(2) }}</pre>
+
+<h2><code>eleventy</code> Data:</h2>
 <pre>{{ eleventy | dump(2) }}</pre>
 
 <footer>

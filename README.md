@@ -2,6 +2,8 @@
 
 Running Eleventy inside of a Netlify serverless function.
 
+_[Read the documentation on 11ty.dev](https://www.11ty.dev/docs/plugins/serverless/)_
+
 ## Run it
 
 ### Locally
@@ -17,14 +19,26 @@ Running Eleventy inside of a Netlify serverless function.
 
 ## How it works
 
-_This requires Eleventy 1.0 Canary 29 or newer. Be careful here, Canary is considered unstable! Don’t use it in production._
+_[Read the documentation on 11ty.dev](https://www.11ty.dev/docs/plugins/serverless/)_
+
+_This requires Eleventy 1.0 Canary 30 or newer. Be careful here, Canary is considered unstable! Don’t use it in production._
 
 1. Use Eleventy as normal.
 	- In this demo `src` is the input directory.
 	- For this demo we include one Nunjucks template (`./src/sample-nunjucks.njk`), a Global Data file, an include template, and an Eleventy layout.
 	- To make any template file into a serverless template, modify your `permalink` object to include a `serverless` key.
 
-2. Add the bundler plugin to your Eleventy configuration file (probably `.eleventy.js`). The name property (we use `serverless` in this example) should match the `key` inside of your template’s `permalink` object.
+```
+---
+permalink:
+  build: "/"
+  serverless: "/:slug/"
+---
+```
+
+This makes `eleventy.path.slug` (the `slug` name matches `:slug`) available in global data for use in your serverless templates.
+
+2. Add the bundler plugin to your Eleventy configuration file (probably `.eleventy.js`). The name you pass into the plugin (we use `serverless` in this example) should match the key inside of your template’s `permalink` object (`permalink.serverless`).
 
 ```js
 const { EleventyServerlessBundlerPlugin } = require("@11ty/eleventy");
@@ -75,9 +89,9 @@ async function handler (event) {
 exports.handler = builder(handler);
 ```
 
-4. Add entries to your `.gitignore` file:
+4. Add entries to your `.gitignore` file so the bundles aren’t checked into your repository.
 
 ```
-netlify/functions/serverless/*
+netlify/functions/serverless/**
 !netlify/functions/serverless/index.js
 ```
