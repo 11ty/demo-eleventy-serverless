@@ -23,6 +23,9 @@
 <p>{{ globaldata }}</p>
 <p>{% include "include.njk" %}</p>
 
+<h2>{{ page.inputPath }} Node.js fs stats</h2>
+<pre>{{ page.inputPath | dateDebug | dump(2) }}</pre>
+
 <h2><code>new Date()</code></h2>
 <pre>{{ now }}</pre>
 

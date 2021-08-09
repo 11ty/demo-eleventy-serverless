@@ -1,4 +1,5 @@
 const { EleventyServerlessBundlerPlugin } = require("@11ty/eleventy");
+const fs = require("fs");
 
 module.exports = function(eleventyConfig) {
 	// Render on first-request
@@ -12,6 +13,10 @@ module.exports = function(eleventyConfig) {
 		name: "dynamic",
 		functionsDir: "./netlify/functions/",
 	});
+
+	eleventyConfig.addFilter("dateDebug", inputPath => {
+		return fs.statSync(inputPath);
+	})
 
 	return {
 		dir: {
