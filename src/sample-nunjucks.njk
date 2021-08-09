@@ -23,9 +23,6 @@
 <p>{{ globaldata }}</p>
 <p>{% include "include.njk" %}</p>
 
-<h2>{{ page.inputPath }} Node.js fs stats</h2>
-<pre>{{ page.inputPath | dateDebug | dump(2) }}</pre>
-
 <h2><code>new Date()</code></h2>
 <pre>{{ now }}</pre>
 
@@ -35,6 +32,11 @@
 <h2><code>eleventy</code> Data:</h2>
 <pre>{{ eleventy | dump(2) }}</pre>
 
+<details>
+	<summary><em>{{ page.inputPath }} Node.js fs stats</em></summary>
+	<pre>{{ page.inputPath | dateDebug | dump(2) }}</pre>
+</details>
+
 <footer>
-	<a href="https://github.com/11ty/demo-eleventy-serverless">Back to the <code>demo-eleventy-serverless</code> GitHub repo</a>
+	<p><a href="https://github.com/11ty/demo-eleventy-serverless">Back to the <code>demo-eleventy-serverless</code> GitHub repo</a></p>
 </footer>
