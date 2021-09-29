@@ -1,7 +1,7 @@
-
-
 [functions]
-node_bundler = "esbuild"           [build]
+node_bundler = "esbuild"
+
+[build]
 publish = "_site"
 command = "npm run build-production"
 
