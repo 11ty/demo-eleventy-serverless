@@ -19,11 +19,6 @@ module.exports = function(eleventyConfig) {
 		return fs.statSync(inputPath);
 	})
 
-	// testing
-	eleventyConfig.addFilter("displayNumber", (number) => {
-		return new Intl.NumberFormat().format(number);
-	})
-
 	return {
 		dir: {
 			input: "src"
