@@ -14,8 +14,14 @@ module.exports = function(eleventyConfig) {
 		functionsDir: "./netlify/functions/",
 	});
 
+	// testing
 	eleventyConfig.addFilter("dateDebug", inputPath => {
 		return fs.statSync(inputPath);
+	})
+
+	// testing
+	eleventyConfig.addFilter("displayNumber", (number) => {
+		return new Intl.NumberFormat().format(number);
 	})
 
 	return {
