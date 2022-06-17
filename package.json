@@ -11,7 +11,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@11ty/eleventy": "1.0.0-beta.7",
+    "@11ty/eleventy": "^1.0.1",
     "@netlify/functions": "^0.7.2"
   }
 }
