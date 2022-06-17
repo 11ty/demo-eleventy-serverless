@@ -21,7 +21,7 @@ _[Read the documentation on 11ty.dev](https://www.11ty.dev/docs/plugins/serverle
 
 _[Read the documentation on 11ty.dev](https://www.11ty.dev/docs/plugins/serverless/)_
 
-_This requires Eleventy 1.0 Canary 30 or newer. Be careful here, Canary is considered unstable! Don’t use it in production._
+_This requires Eleventy 1.0 or newer._
 
 1. Use Eleventy as normal.
 	- In this demo `src` is the input directory.
