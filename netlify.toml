@@ -3,6 +3,13 @@ publish = "_site"
 command = "npm run build-production"
 
 [[redirects]]
+from = "/dynamic_fb"
+to = "/.netlify/functions/dynamic_fb"
+status = 200
+force = true
+_generated_by_eleventy_serverless = "dynamic_fb"
+
+[[redirects]]
 from = "/:slug/dynamic/"
 to = "/.netlify/functions/dynamic"
 status = 200
