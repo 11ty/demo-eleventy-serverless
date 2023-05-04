@@ -6,12 +6,14 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addPlugin(EleventyServerlessBundlerPlugin, {
 		name: "serverless",
 		functionsDir: "./netlify/functions/",
+		redirects: "netlify-toml-builders",
 	});
 
 	// Fully dynamic template for comparison
 	eleventyConfig.addPlugin(EleventyServerlessBundlerPlugin, {
 		name: "dynamic",
 		functionsDir: "./netlify/functions/",
+		redirects: "netlify-toml-functions",
 	});
 
 	// testing
