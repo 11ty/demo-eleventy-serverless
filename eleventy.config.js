@@ -1,6 +1,7 @@
 const { EleventyServerlessBundlerPlugin } = require("@11ty/eleventy");
 const fs = require("fs");
 
+/** @param {import('@11ty/eleventy').UserConfig} eleventyConfig */
 module.exports = function(eleventyConfig) {
 	// Render on first-request
 	eleventyConfig.addPlugin(EleventyServerlessBundlerPlugin, {
